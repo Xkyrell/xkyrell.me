@@ -1,1 +1,87 @@
-// TODO: home page
+import Layout from '../layouts/Layout.astro';
+import Icons from '../components/Icons.astro';
+
+import { profile } from '../config';
+import { home, t } from '../content';
+
+<Layout title={t(home.title)} description={home.description}>
+  <div class="container hero">
+    <p class="kicker reveal" style="--i: 0">{home.kicker}</p>
+    <h1 class="reveal" style="--i: 1">{profile.name}</h1>
+    <p class="lead reveal" style="--i: 2">{home.lead}</p>
+    <div class="actions">
+      <a
+        class="btn btn-primary fly"
+        style="--i: 4"
+        href={profile.github}
+        rel="noopener noreferrer"
+      >
+        <Icons name="github" />
+        {home.buttons.github}
+        <Icons name="arrow" />
+      </a>
+
+      <a
+        class="btn fly"
+        style="--i: 5"
+        href={`mailto:${profile.email}`}
+      >
+        <Icons name="mail" />
+        {home.buttons.email}
+        <Icons name="arrow" />
+      </a>
+
+      <a
+        class="btn fly"
+        style="--i: 6"
+        href={`https://discord.com/users/${profile.discordId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icons name="discord" />
+        {home.buttons.discord}
+        <Icons name="arrow" />
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero {
+    padding-top: clamp(3rem, 14vh, 8rem);
+  }
+
+  .kicker {
+    color: #c4b5fd;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 0.6rem;
+  }
+
+  h1,
+  .kicker {
+    text-shadow:
+      0 0 6px #080711,
+      0 0 14px #080711,
+      0 2px 24px rgba(8, 7, 17, 0.95);
+  }
+
+  .lead {
+    max-width: 36em;
+    font-size: 1.15rem;
+    color: var(--text);
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    background: var(--surface-solid);
+    border: 1px solid var(--border);
+    margin-block: 1rem 1.6rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+</style>
