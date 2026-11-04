@@ -1,0 +1,40 @@
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080711" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <a class="skip sr-only" href="#main">Skip to content</a>
+    <main id="main"><slot /></main>
+
+  </body>
+</html>
+
+<style is:global>
+  .skip:focus { 
+    position: fixed; 
+    z-index: 100; 
+    top: .5rem; 
+    left: .5rem; 
+    width: auto; 
+    height: auto; 
+    clip: auto; 
+    padding: .6rem 1rem;
+    background: #1b1236; 
+    border: 1px solid var(--violet); 
+    border-radius: 8px; 
+    color: #fff; 
+    }
+</style>
