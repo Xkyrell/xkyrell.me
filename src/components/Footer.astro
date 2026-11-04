@@ -1,0 +1,48 @@
+import { url } from '../config';
+const year = new Date().getFullYear();
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      <span>© {year} All rights reserved.</span>
+      <span class="sep" aria-hidden="true"></span>
+      <a href={url('/privacy')}>Privacy Policy</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { 
+    padding: 1.4rem 0 1.8rem; 
+    border-top: 1px solid rgba(139, 92, 246, .22);
+    background: linear-gradient(180deg, transparent, rgba(4, 3, 10, .7)); 
+  }
+
+  p { 
+    margin: 0; 
+    display: flex; 
+    flex-wrap: wrap; 
+    align-items: center; 
+    gap: .5rem 1rem; 
+    font-size: .92rem; 
+    color: var(--muted); 
+  }
+
+  .sep { 
+    width: 1px; 
+    height: 1em; 
+    background: rgba(184, 177, 200, .5); 
+  }
+
+  a { 
+    color: var(--muted); 
+    text-decoration: none; 
+    padding: .5rem 0; 
+    transition: color .2s, text-shadow .2s; 
+  }
+
+  a:hover { 
+    color: #c4b5fd; 
+    text-shadow: 0 0 12px rgba(168, 85, 247, .8); 
+  }
+</style>
