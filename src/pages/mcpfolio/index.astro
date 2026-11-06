@@ -1,0 +1,103 @@
+import Layout from '../../layouts/Layout.astro';
+
+const stack = [
+  { title: 'Languages', items: ['Java', 'Kotlin'] },
+  { title: 'Minecraft', items: ['Paper', 'Folia', 'Velocity', 'BungeeCord'] },
+  { title: 'Networking and packets', items: ['ProtocolLib', 'PacketEvents', 'NMS'] },
+  { title: 'Data and infrastructure', items: ['Redis', 'SQL / NoSQL'] },
+  { title: 'Tools', items: ['Git', 'Maven', 'Gradle', 'Linux'] },
+];
+
+<Layout
+  title="Portfolio"
+  description="Example.."
+  nav="portfolio"
+>
+  <div class="container">
+    <h1>Portfolio</h1>
+
+    <section class="card panel about" aria-labelledby="about">
+      <h2 id="about">Minecraft</h2>
+      <p>Example2</p>
+    </section>
+
+    <section aria-labelledby="stack">
+      <h2 id="stack">Tech stack</h2>
+      <div class="grid">
+        {stack.map((group) => (
+          <article class="card">
+            <h3>{group.title}</h3>
+            <ul class="chips">
+              {group.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby="projects">
+      <h2 id="projects">Projects</h2>
+      <div class="grid">
+        <article class="card soon">
+          <h3>Project showcase</h3>
+          <p class="muted">Example3</p>
+          <p class="soon-label">Coming soon...</p>
+        </article>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    margin-top: 1.5rem;
+  }
+
+  section {
+    margin-block: 2rem;
+  }
+
+  .about p {
+    margin: 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+    gap: 1rem;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0.6rem 0 0;
+    padding: 0;
+  }
+
+  .chips li {
+    padding: 0.25rem 0.75rem;
+    border: 1px solid rgba(139, 92, 246, 0.45);
+    border-radius: 999px;
+    background: rgba(139, 92, 246, 0.16);
+    font-size: 0.95rem;
+  }
+
+  .soon {
+    grid-column: 1 / -1;
+    border-style: dashed;
+  }
+
+  .soon p {
+    margin: 0 0 0.5rem;
+  }
+
+  .soon-label {
+    margin: 1rem 0 0 !important;
+    color: #c4b5fd;
+    font-weight: 600;
+  }
+</style>
