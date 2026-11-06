@@ -1,0 +1,95 @@
+import Layout from '../../layouts/Layout.astro';
+
+const faqs = [];
+
+<Layout
+  title="FAQ - Backend Java Developer"
+  description="TODO: Description"
+  nav="faq"
+>
+  <div class="container">
+    <h1>FAQ</h1>
+    <div class="list">
+      {faqs.map((faq) => (
+        <details class="card panel">
+          <summary>{faq.q}</summary>
+          <div class="answer">
+            <p>{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    margin-top: 1.5rem;
+  }
+
+  .list {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 1rem;
+  }
+
+  details {
+    padding: 0;
+    interpolate-size: allow-keywords;
+  }
+
+  summary {
+    position: relative;
+    min-height: 48px;
+    padding: 1rem 3rem 1rem 1.4rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::after {
+    position: absolute;
+    top: 50%;
+    right: 1.3rem;
+    width: 9px;
+    height: 9px;
+    margin-top: -7px;
+    border-right: 2px solid #c4b5fd;
+    border-bottom: 2px solid #c4b5fd;
+    content: '';
+    transform: rotate(45deg);
+    transition: transform 0.3s var(--ease);
+  }
+
+  details[open] summary::after {
+    margin-top: -2px;
+    transform: rotate(225deg);
+  }
+
+  .answer {
+    padding: 0 1.4rem 1.1rem;
+    color: var(--muted);
+  }
+
+  .answer p {
+    margin: 0;
+  }
+
+  /* Smooth open/close where supported; falls back to instant elsewhere. */
+  details::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition:
+      block-size 0.3s var(--ease),
+      content-visibility 0.3s allow-discrete;
+  }
+
+  details[open]::details-content {
+    block-size: auto;
+  }
+</style>
