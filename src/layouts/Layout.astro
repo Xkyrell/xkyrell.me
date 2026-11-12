@@ -76,33 +76,6 @@ const canonical = Astro.site
         update();
         btn.addEventListener('click', () => scrollTo({ top: 0 }));
       }
-
-      document.querySelectorAll<HTMLButtonElement>('[data-copy]')
-        .forEach((button) => {
-          const label = button.querySelector('.label');
-          const original = label?.textContent ?? '';
-
-          button.addEventListener('click', async () => {
-            try {
-              await navigator.clipboard.writeText(button.dataset.copy ?? '');
-
-              if (label) {
-                label.textContent = 'Copied!';
-              }
-            } 
-            catch {
-              if (label) {
-                label.textContent = button.dataset.copy ?? '';
-              }
-            }
-
-            setTimeout(() => {
-              if (label) {
-                label.textContent = original;
-              }
-            }, 1800);
-          });
-        });
     </script>
   </body>
 </html>
