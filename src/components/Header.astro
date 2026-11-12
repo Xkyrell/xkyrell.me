@@ -13,8 +13,8 @@ const items = [
 <header class="site-header">
   <nav class="container" aria-label="Main">
     <ul>
-      {items.map((item) => (
-        <li>
+      {items.map((item, n) => (
+        <li class="fly" style={`--i:${n}`}>
           <a
             href={item.href}
             aria-current={item.key === current ? 'page' : undefined}

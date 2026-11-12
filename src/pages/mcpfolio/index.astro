@@ -15,14 +15,14 @@ const stack = [
   noindex
 >
   <div class="container">
-    <h1>Portfolio</h1>
+    <h1 class="reveal" style="--i:0">Portfolio</h1>
 
-    <section class="card panel about" aria-labelledby="about">
+    <section class="card panel about reveal" style="--i:1" aria-labelledby="about">
       <h2 id="about">Minecraft</h2>
       <p>Example2</p>
     </section>
 
-    <section aria-labelledby="stack">
+    <section class="reveal" style="--i:2" aria-labelledby="stack">
       <h2 id="stack">Tech stack</h2>
       <div class="grid">
         {stack.map((group) => (
@@ -38,7 +38,7 @@ const stack = [
       </div>
     </section>
 
-    <section aria-labelledby="projects">
+    <section class="reveal" style="--i:3" aria-labelledby="projects">
       <h2 id="projects">Projects</h2>
       <div class="grid">
         <article class="card soon">

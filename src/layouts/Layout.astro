@@ -34,9 +34,14 @@ const canonical = Astro.site
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <script is:inline>
+      // Show the loader right away (before first paint); skipped for reduced motion.
+      try { if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('is-loading'); } catch (e) {}
+    </script>
   </head>
 
-  <body>
+  <body class={nav ? 'has-header' : undefined}>
+    <div class="loader" aria-hidden="true"><span class="ring"></span></div>
     <Background />
     <a class="skip sr-only" href="#main">Skip to content</a>
     {nav && <Header current={nav} />}
@@ -44,6 +49,22 @@ const canonical = Astro.site
     <Footer />
 
     <script>
+      const root = document.documentElement;
+      if (root.classList.contains('is-loading')) {
+        const start = performance.now();
+        let done = false;
+        const finish = () => {
+          if (done) return;
+          done = true;
+          const wait = Math.max(0, 550 - (performance.now() - start)); // Quick spin
+          setTimeout(() => root.classList.remove('is-loading'), wait);
+        };
+        if (document.readyState === 'complete') finish();
+        else addEventListener('load', finish, { once: true });
+        setTimeout(finish, 3500); // never get stuck
+        addEventListener('pageshow', (e) => { if (e.persisted) root.classList.remove('is-loading'); });
+      }
+
       document.querySelectorAll<HTMLButtonElement>('[data-copy]')
         .forEach((button) => {
           const label = button.querySelector('.label');

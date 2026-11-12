@@ -9,10 +9,10 @@ const faqs = [];
   noindex
 >
   <div class="container">
-    <h1>FAQ</h1>
+    <h1 class="reveal" style="--i:0">FAQ</h1>
     <div class="list">
-      {faqs.map((faq) => (
-        <details class="card panel">
+      {faqs.map((faq, i) => (
+        <details class="card panel reveal" style={`--i:${i + 1}`}>
           <summary>{faq.q}</summary>
           <div class="answer">
             <p>{faq.a}</p>
