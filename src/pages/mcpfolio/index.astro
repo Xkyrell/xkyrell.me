@@ -1,12 +1,15 @@
+
 import Layout from '../../layouts/Layout.astro';
 
 const stack = [
-  { title: 'Languages', items: ['Java', 'Kotlin'] },
+  { title: 'Languages', items: ['Java', 'Kotlin', 'SQL'] },
   { title: 'Minecraft', items: ['Paper', 'Folia', 'Velocity', 'BungeeCord'] },
-  { title: 'Networking and packets', items: ['ProtocolLib', 'PacketEvents', 'NMS'] },
-  { title: 'Data and infrastructure', items: ['Redis', 'SQL / NoSQL'] },
-  { title: 'Tools', items: ['Git', 'Maven', 'Gradle', 'Linux'] },
+  { title: 'Networking and packets', items: ['ProtocolLib', 'PacketEvents', 'NMS', 'Netty'] },
+  { title: 'Data and infrastructure', items: ['Redis', 'MySQL', 'SQLite', 'H2', 'MongoDB', 'Docker'] },
+  { title: 'Tools', items: ['Git', 'Maven', 'Gradle', 'Linux', 'IntelliJ IDEA'] },
 ];
+
+const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
 
 <Layout
   title="Portfolio"
@@ -17,35 +20,65 @@ const stack = [
   <div class="container">
     <h1 class="reveal" style="--i:0">Portfolio</h1>
 
-    <section class="card panel about reveal" style="--i:1" aria-labelledby="about">
+    <section
+      class="card panel about reveal"
+      style="--i:1"
+      aria-labelledby="about"
+    >
       <h2 id="about">Minecraft</h2>
-      <p>Example2</p>
-    </section>
+      <p class="intro">
+        TODO: desc
+      </p>
 
-    <section class="reveal" style="--i:2" aria-labelledby="stack">
-      <h2 id="stack">Tech stack</h2>
-      <div class="grid">
+      <h3 class="sub" id="stack">Tech stack</h3>
+
+      <ol class="layers" aria-labelledby="stack">
         {stack.map((group) => (
-          <article class="card">
-            <h3>{group.title}</h3>
+          <li>
+            <span class="node" aria-hidden="true"></span>
+            <h4>{group.title}</h4>
+
             <ul class="chips">
-              {group.items.map((item) => (
-                <li>{item}</li>
+              {group.items.map((t) => (
+                <li>{t}</li>
               ))}
             </ul>
-          </article>
+          </li>
         ))}
-      </div>
+      </ol>
     </section>
 
-    <section class="reveal" style="--i:3" aria-labelledby="projects">
+    <section
+      class="card panel projects reveal"
+      style="--i:2"
+      aria-labelledby="projects"
+    >
       <h2 id="projects">Projects</h2>
-      <div class="grid">
-        <article class="card soon">
-          <h3>Project showcase</h3>
-          <p class="muted">Example3</p>
-          <p class="soon-label">Coming soon...</p>
-        </article>
+
+      <div class="window">
+        <div class="bar" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+          <span></span>
+        </div>
+
+        <div class="screen">
+          <div class="stage" aria-hidden="true">
+            <div class="cube">
+              {faces.map((face) => (
+                <b class={face}></b>
+              ))}
+            </div>
+
+            <div class="shadow"></div>
+          </div>
+
+          <div class="copy">
+            <p class="soon-label">Coming soon...</p>
+            <p class="muted">Example</p>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -56,49 +89,356 @@ const stack = [
     margin-top: 1.5rem;
   }
 
-  section {
-    margin-block: 2rem;
+  .card {
+    margin-block: 1.5rem;
+    padding: 1.8rem clamp(1.2rem, 4vw, 2.2rem);
   }
 
-  .about p {
+  .intro {
+    margin: 0 0 1.8rem;
+    max-width: 62ch;
+  }
+
+  .sub {
+    font-size: 1.3rem;
+    margin: 0 0 1.1rem;
+  }
+
+  .layers {
+    list-style: none;
     margin: 0;
+    padding: 0 0 0 1.6rem;
+    position: relative;
   }
 
-  .grid {
+  .layers::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: .7rem;
+    bottom: .7rem;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(
+      180deg,
+      rgba(168, 85, 247, .9),
+      rgba(139, 92, 246, .15)
+    );
+  }
+
+  .layers > li {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
-    gap: 1rem;
+    grid-template-columns: minmax(0, 13rem) 1fr;
+    align-items: center;
+    gap: .4rem 1.2rem;
+    padding: .7rem 0;
+    border-top: 1px solid rgba(139, 92, 246, .16);
+  }
+
+  .layers > li:first-child {
+    border-top: 0;
+  }
+
+  .node {
+    position: absolute;
+    left: -1.6rem;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    margin-top: -6px;
+    border-radius: 3px;
+    background: #0d0918;
+    border: 2px solid #a855f7;
+    box-shadow: 0 0 12px rgba(168, 85, 247, .8);
+    transition: background .3s var(--ease);
+  }
+
+  .layers > li:hover .node {
+    background: #a855f7;
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 650;
+    color: #e9defe;
   }
 
   .chips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    list-style: none;
-    margin: 0.6rem 0 0;
-    padding: 0;
+    gap: .5rem;
   }
 
   .chips li {
-    padding: 0.25rem 0.75rem;
-    border: 1px solid rgba(139, 92, 246, 0.45);
-    border-radius: 999px;
-    background: rgba(139, 92, 246, 0.16);
-    font-size: 0.95rem;
+    padding: .25rem .8rem;
+    border-radius: 8px;
+    font-size: .95rem;
+    background: rgba(139, 92, 246, .16);
+    border: 1px solid rgba(139, 92, 246, .45);
+    transition:
+      background .25s var(--ease),
+      border-color .25s var(--ease),
+      transform .25s var(--ease);
   }
 
-  .soon {
-    grid-column: 1 / -1;
-    border-style: dashed;
+  .chips li:hover {
+    background: rgba(168, 85, 247, .32);
+    border-color: #a855f7;
+    transform: translateY(-2px);
   }
 
-  .soon p {
-    margin: 0 0 0.5rem;
+  .projects h2 {
+    margin-bottom: 1.1rem;
+  }
+
+  .window {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(8, 6, 18, .45);
+    border: 1px solid rgba(139, 92, 246, .5);
+    box-shadow:
+      0 18px 50px -24px rgba(168, 85, 247, .6),
+      inset 0 0 60px rgba(124, 58, 237, .08);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    padding: .65rem .9rem;
+    border-bottom: 1px solid rgba(139, 92, 246, .3);
+    background: rgba(139, 92, 246, .08);
+  }
+
+  .bar i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(196, 181, 253, .35);
+  }
+
+  .bar span {
+    margin-left: .6rem;
+    height: 8px;
+    width: min(220px, 40%);
+    border-radius: 4px;
+    background: rgba(196, 181, 253, .14);
+  }
+
+  .screen {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(180px, 260px) 1fr;
+    align-items: center;
+    gap: 1rem 2rem;
+    padding: 2.4rem clamp(1.2rem, 4vw, 2.6rem);
+    min-height: 260px;
+    background:
+      radial-gradient(
+        circle at 20% 50%,
+        rgba(168, 85, 247, .22),
+        transparent 55%
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(196, 181, 253, .035) 0 1px,
+        transparent 1px 28px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(196, 181, 253, .035) 0 1px,
+        transparent 1px 28px
+      );
+  }
+
+  .screen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(196, 181, 253, .09) 50%,
+      transparent 60%
+    );
+    background-size: 250% 100%;
+    animation: sheen 7s ease-in-out 2.5s infinite;
+  }
+
+  @keyframes sheen {
+    0% {
+      background-position: 150% 0;
+    }
+
+    45%,
+    100% {
+      background-position: -50% 0;
+    }
+  }
+
+  .stage {
+    position: relative;
+    height: 170px;
+    display: grid;
+    place-items: center;
+    perspective: 700px;
+  }
+
+  .cube {
+    --s: 84px;
+    position: relative;
+    width: var(--s);
+    height: var(--s);
+    transform-style: preserve-3d;
+    animation:
+      turn 16s linear infinite,
+      bob 5s ease-in-out infinite;
+  }
+
+  .cube b {
+    position: absolute;
+    inset: 0;
+    border: 1.5px solid #c4b5fd;
+    background: linear-gradient(
+      135deg,
+      rgba(168, 85, 247, .38),
+      rgba(76, 29, 149, .5)
+    );
+    box-shadow:
+      inset 0 0 22px rgba(196, 181, 253, .35),
+      0 0 18px rgba(168, 85, 247, .35);
+  }
+
+  .cube b::after {
+    content: '';
+    position: absolute;
+    inset: 22%;
+    border: 1px solid rgba(233, 222, 254, .35);
+  }
+
+  .cube .front {
+    transform: translateZ(calc(var(--s) / 2));
+  }
+
+  .cube .back {
+    transform: rotateY(180deg) translateZ(calc(var(--s) / 2));
+  }
+
+  .cube .right {
+    transform: rotateY(90deg) translateZ(calc(var(--s) / 2));
+  }
+
+  .cube .left {
+    transform: rotateY(-90deg) translateZ(calc(var(--s) / 2));
+  }
+
+  .cube .top {
+    transform: rotateX(90deg) translateZ(calc(var(--s) / 2));
+  }
+
+  .cube .bottom {
+    transform: rotateX(-90deg) translateZ(calc(var(--s) / 2));
+  }
+
+  @keyframes turn {
+    from {
+      transform: rotateX(-24deg) rotateY(0);
+    }
+
+    to {
+      transform: rotateX(-24deg) rotateY(360deg);
+    }
+  }
+
+  @keyframes bob {
+    0%,
+    100% {
+      translate: 0 -6px;
+    }
+
+    50% {
+      translate: 0 6px;
+    }
+  }
+
+  .shadow {
+    position: absolute;
+    bottom: 6px;
+    width: 90px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgba(168, 85, 247, .5),
+      transparent
+    );
+    animation: shade 5s ease-in-out infinite;
+  }
+
+  @keyframes shade {
+    0%,
+    100% {
+      transform: scale(1.1);
+      opacity: .9;
+    }
+
+    50% {
+      transform: scale(.8);
+      opacity: .5;
+    }
+  }
+
+  .copy {
+    position: relative;
+  }
+
+  .copy p {
+    margin: 0;
   }
 
   .soon-label {
-    margin: 1rem 0 0 !important;
-    color: #c4b5fd;
-    font-weight: 600;
+    font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+    font-weight: 750;
+    letter-spacing: -.01em;
+    margin-bottom: .5rem !important;
+    background: linear-gradient(
+      90deg,
+      #e9defe,
+      #a78bfa 60%,
+      #c084fc
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+  }
+
+  @media (max-width: 640px) {
+    .layers > li {
+      grid-template-columns: 1fr;
+    }
+
+    .screen {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding-block: 1.8rem;
+    }
+
+    .stage {
+      height: 150px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cube {
+      transform: rotateX(-24deg) rotateY(35deg);
+    }
   }
 </style>
