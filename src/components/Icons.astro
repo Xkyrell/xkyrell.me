@@ -1,6 +1,8 @@
+---
 const { name } = Astro.props as {
   name: 'github' | 'mail' | 'discord' | 'arrow' | 'play';
 };
+---
 
 {name === 'github' && (
   <svg

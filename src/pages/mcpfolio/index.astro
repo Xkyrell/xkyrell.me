@@ -1,3 +1,4 @@
+---
 import Layout from '../../layouts/Layout.astro';
 import Icons from '../../components/Icons.astro';
 import { projects } from '../../projects';
@@ -7,6 +8,7 @@ import { url } from '../../config';
 const cover = (src: string) => (/^https?:\/\//.test(src) ? src : url(`/projects/${src}`));
 
 const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
+---
 
 <Layout
   title={data.title}
