@@ -102,10 +102,10 @@ const river = [
 }));
 ---
 
-<div class="bg" aria-hidden="true">
+<div class="background" aria-hidden="true">
   <img
     class="art"
-    src={url('/bg.webp')}
+    src={url('/background.webp')}
     alt=""
     decoding="async"
     fetchpriority="high"
@@ -228,7 +228,7 @@ const river = [
 </div>
 
 <style is:global>
-  .bg {
+  .background {
     position: fixed;
     inset: 0;
     z-index: -1;
@@ -237,7 +237,7 @@ const river = [
     pointer-events: none;
   }
 
-  .bg .art,
+  .background .art,
   .scene {
     --h: max(56.2vw, 100vh);
 
