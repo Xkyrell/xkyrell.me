@@ -16,10 +16,9 @@ export const site = {
 
 // Home
 export const home = {
-  title: 'Xkyrell',
+  title: '{nickname} | Welcome',
   description: 'TODO: desc',
   kicker: 'Backend Developer',
-  name: 'Volodymyr',
   lead:
     'TODO: lead',
   buttons: { github: 'GitHub', email: 'Gmail', discord: 'Discord' },
@@ -27,7 +26,7 @@ export const home = {
 
 // Portfolio
 export const portfolio = {
-  title: 'Xkyrell | Portfolio',
+  title: '{nickname} | Portfolio',
   description: 'TODO: desc',
   heading: 'Portfolio',
   about: {
@@ -52,7 +51,7 @@ export const portfolio = {
 
 // FAQ definition
 export const faq = {
-  title: 'Xkyrell | FAQ',
+  title: '{nickname} | FAQ',
   description: 'Frequently asked questions from employers and clients.',
   heading: 'FAQ',
   items: [],
@@ -60,7 +59,7 @@ export const faq = {
 
 // Privacy
 export const privacy = {
-  title: 'Xkyrell | Privacy Policy',
+  title: '{nickname} | Privacy Policy',
   description: 'How this website handles data.',
   heading: 'Privacy Policy',
   updated: 'Last updated: 6 November 2026',
@@ -104,10 +103,10 @@ import { profile } from './config';
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-export const t = (s: string) => s.replace(/\{(name|role|email)\}/g, (_, k: 'name' | 'role' | 'email') => profile[k]);
+export const placeholder = (s: string) => s.replace(/\{(name|nickname|email)\}/g, (_, k: 'name' | 'nickname' | 'email') => profile[k]);
 
 export const rich = (s: string) =>
-  esc(t(s)).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, text, href) => {
+  esc(placeholder(s)).replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, text, href) => {
     const external = /^https?:/.test(href);
     return `<a href="${href}"${external ? ' rel="noopener noreferrer"' : ''}>${text}</a>`;
   });

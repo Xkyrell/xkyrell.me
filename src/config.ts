@@ -1,5 +1,6 @@
 export const profile = {
-  name: 'VOLODYMYR',
+  name: 'Volodymyr',
+  nickname: 'Xkyrell',
   github: 'https://github.com/xkyrell',
   email: 'xkyrell@gmail.com',
   discordId: '371321961881796612',

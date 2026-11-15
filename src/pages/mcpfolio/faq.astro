@@ -1,10 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { faq, rich } from '../../content';
+import { faq, rich, placeholder } from '../../content';
 ---
 
 <Layout
-  title={faq.title}
+  title={placeholder(faq.title)}
   description={faq.description}
   nav="faq"
   noindex
