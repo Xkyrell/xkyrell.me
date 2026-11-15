@@ -1,5 +1,9 @@
-
 import Layout from '../../layouts/Layout.astro';
+import Icons from '../../components/Icons.astro';
+import { projects } from '../../projects';
+import { url } from '../../config';
+
+const cover = (src: string) => (/^https?:\/\//.test(src) ? src : url(`/projects/${src}`));
 
 const stack = [
   { title: 'Languages', items: ['Java', 'Kotlin', 'SQL'] },
@@ -19,7 +23,6 @@ const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
 >
   <div class="container">
     <h1 class="reveal" style="--i:0">Portfolio</h1>
-
     <section
       class="card panel about reveal"
       style="--i:1"
@@ -31,7 +34,6 @@ const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
       </p>
 
       <h3 class="sub" id="stack">Tech stack</h3>
-
       <ol class="layers" aria-labelledby="stack">
         {stack.map((group) => (
           <li>
@@ -39,8 +41,8 @@ const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
             <h4>{group.title}</h4>
 
             <ul class="chips">
-              {group.items.map((t) => (
-                <li>{t}</li>
+              {group.items.map((item) => (
+                <li>{item}</li>
               ))}
             </ul>
           </li>
@@ -54,32 +56,53 @@ const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
       aria-labelledby="projects"
     >
       <h2 id="projects">Projects</h2>
+      {projects.length > 0 ? (
+        <ul class="list">
+          {projects.map((project) => (
+            <li class="project">
+              <div class="shot">
+                <img src={cover(project.image)} alt={project.imageAlt ?? ''} loading="lazy" decoding="async" width="640" height="360" />
+              </div>
+              <div class="body">
+                <h3>{project.title}</h3>
+                <project class="desc">{project.description}</project>
+                {project.tags && project.tags.length > 0 && (
+                  <ul class="chips">{project.tags.map((tag) => <li>{tag}</li>)}</ul>
+                )}
+                {project.video && (
+                  <a class="btn watch" href={project.video} target="_blank" rel="noopener noreferrer">
+                    <Icons name="play" />Watch it<Icons name="arrow" />
+                  </a>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="window">
+          <div class="bar" aria-hidden="true">
+            <i></i>
+            <i></i>
+            <i></i>
+            <span></span>
+          </div>
+          <div class="screen">
+            <div class="stage" aria-hidden="true">
+              <div class="cube">
+                {faces.map((face) => (
+                  <b class={face}></b>
+                ))}
+              </div>
 
-      <div class="window">
-        <div class="bar" aria-hidden="true">
-          <i></i>
-          <i></i>
-          <i></i>
-          <span></span>
-        </div>
-
-        <div class="screen">
-          <div class="stage" aria-hidden="true">
-            <div class="cube">
-              {faces.map((face) => (
-                <b class={face}></b>
-              ))}
+              <div class="shadow"></div>
             </div>
-
-            <div class="shadow"></div>
-          </div>
-
-          <div class="copy">
-            <p class="soon-label">Coming soon...</p>
-            <p class="muted">Example</p>
+            <div class="copy">
+              <p class="soon-label">Coming soon...</p>
+              <p class="muted">Example</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   </div>
 </Layout>
@@ -190,6 +213,71 @@ const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
     background: rgba(168, 85, 247, .32);
     border-color: #a855f7;
     transform: translateY(-2px);
+  }
+
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.2rem;
+  }
+
+  .project {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) 1fr;
+    gap: 1.4rem;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 14px;
+    background: rgba(8, 6, 18, .4);
+    border: 1px solid rgba(139, 92, 246, .4);
+    transition:
+      border-color .35s var(--ease),
+      box-shadow .35s var(--ease);
+  }
+
+  .project:hover {
+    border-color: var(--border-strong);
+    box-shadow: 0 12px 36px -18px rgba(168, 85, 247, .7);
+  }
+
+  .shot {
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #0d0918;
+    border: 1px solid rgba(139, 92, 246, .35);
+  }
+
+  .shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .8s var(--ease);
+  }
+
+  .project:hover .shot img {
+    transform: scale(1.04);
+  }
+
+  .body h3 {
+    margin: 0 0 .4rem;
+    font-size: 1.25rem;
+  }
+
+  .desc {
+    margin: 0 0 .8rem;
+    color: var(--muted);
+  }
+
+  .body .chips {
+    margin-bottom: 1rem;
+  }
+
+  .watch {
+    min-height: 44px;
   }
 
   .projects h2 {
@@ -421,6 +509,10 @@ const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
   }
 
   @media (max-width: 640px) {
+    .project {
+      grid-template-columns: 1fr;
+    }
+
     .layers > li {
       grid-template-columns: 1fr;
     }
