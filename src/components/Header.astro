@@ -1,17 +1,18 @@
 import { url } from '../config';
+import { site } from '../content';
 
 const { current } = Astro.props as {
   current: 'portfolio' | 'faq';
 };
 
 const items = [
-  { key: 'home', label: 'Home', href: url('/') },
-  { key: 'portfolio', label: 'Portfolio', href: url('/mcpfolio') },
-  { key: 'faq', label: 'FAQ', href: url('/mcpfolio/faq') },
+  { key: 'home', label: site.nav.home, href: url('/') },
+  { key: 'portfolio', label: site.nav.portfolio, href: url('/portfolio') },
+  { key: 'faq', label: site.nav.faq, href: url('/portfolio/faq') },
 ];
 
 <header class="site-header">
-  <nav class="container" aria-label="Main">
+  <nav class="container" aria-label={site.mainNavLabel}>
     <ul>
       {items.map((item, n) => (
         <li class="fly" style={`--i:${n}`}>

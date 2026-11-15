@@ -1,15 +1,21 @@
 import { url } from '../config';
+import { site } from '../content';
 const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="container">
     <p>
-      <span>© {year} All rights reserved.</span>
+      <span>© <span id="year">{year}</span> {site.footer.rights}</span>
       <span class="sep" aria-hidden="true"></span>
-      <a href={url('/privacy')}>Privacy Policy</a>
+      <a href={url('/privacy')}>{site.footer.privacy}</a>
     </p>
   </div>
 </footer>
+
+<script>
+  const el = document.getElementById('year');
+  if (el) el.textContent = String(new Date().getFullYear());
+</script>
 
 <style>
   .site-footer { 

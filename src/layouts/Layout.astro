@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
 import { url } from '../config';
+import { site } from '../content';
 
 interface Props {
   title: string;
@@ -19,7 +20,7 @@ const canonical = Astro.site
   : undefined;
 
 <!doctype html>
-<html lang="en">
+<html lang={site.lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,12 +44,12 @@ const canonical = Astro.site
   <body class={nav ? 'has-header' : undefined}>
     <div class="loader" aria-hidden="true"><span class="ring"></span></div>
     <Background />
-    <a class="skip sr-only" href="#main">Skip to content</a>
+    <a class="skip sr-only" href="#main">{site.skipLink}</a>
     {nav && <Header current={nav} />}
     <main id="main"><slot /></main>
     <Footer />
 
-    <button class="to-top" type="button" aria-label="Back to top" hidden>
+    <button class="to-top" type="button" aria-label={site.backToTop} hidden>
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" /></svg>
     </button>
 

@@ -1,21 +1,20 @@
 import Layout from '../../layouts/Layout.astro';
-
-const faqs = [];
+import { faq, rich } from '../../content';
 
 <Layout
-  title="FAQ - Backend Java Developer"
-  description="TODO: Description"
+  title={faq.title}
+  description={faq.description}
   nav="faq"
   noindex
 >
   <div class="container">
-    <h1 class="reveal" style="--i:0">FAQ</h1>
+    <h1 class="reveal" style="--i:0">{faq.heading}</h1>
     <div class="list">
-      {faqs.map((faq, i) => (
-        <details class="card panel reveal" style={`--i:${i + 1}`}>
-          <summary>{faq.q}</summary>
+      {faq.items.map((item, index) => (
+        <details class="card panel reveal" style={`--index:${index + 1}`}>
+          <summary>{item.question}</summary>
           <div class="answer">
-            <p>{faq.a}</p>
+            <p set:html={rich(item.answer)} />
           </div>
         </details>
       ))}
@@ -81,7 +80,7 @@ const faqs = [];
     margin: 0;
   }
 
-  /* Smooth open/close where supported; falls back to instant elsewhere. */
+  /* Smooth open/close where supported */
   details::details-content {
     block-size: 0;
     overflow: hidden;

@@ -1,41 +1,34 @@
 import Layout from '../../layouts/Layout.astro';
 import Icons from '../../components/Icons.astro';
 import { projects } from '../../projects';
+import { portfolio as data } from '../../content';
 import { url } from '../../config';
 
 const cover = (src: string) => (/^https?:\/\//.test(src) ? src : url(`/projects/${src}`));
 
-const stack = [
-  { title: 'Languages', items: ['Java', 'Kotlin', 'SQL'] },
-  { title: 'Minecraft', items: ['Paper', 'Folia', 'Velocity', 'BungeeCord'] },
-  { title: 'Networking and packets', items: ['ProtocolLib', 'PacketEvents', 'NMS', 'Netty'] },
-  { title: 'Data and infrastructure', items: ['Redis', 'MySQL', 'SQLite', 'H2', 'MongoDB', 'Docker'] },
-  { title: 'Tools', items: ['Git', 'Maven', 'Gradle', 'Linux', 'IntelliJ IDEA'] },
-];
-
 const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
 
 <Layout
-  title="Portfolio"
-  description="Example.."
+  title={data.title}
+  description={data.description}
   nav="portfolio"
   noindex
 >
   <div class="container">
-    <h1 class="reveal" style="--i:0">Portfolio</h1>
+    <h1 class="reveal" style="--i:0">{data.heading}</h1>
     <section
       class="card panel about reveal"
       style="--i:1"
       aria-labelledby="about"
     >
-      <h2 id="about">Minecraft</h2>
+      <h2 id="about">{data.about.heading}</h2>
       <p class="intro">
-        TODO: desc
+        {data.about.text}
       </p>
 
-      <h3 class="sub" id="stack">Tech stack</h3>
+      <h3 class="sub" id="stack">{data.stackHeading}</h3>
       <ol class="layers" aria-labelledby="stack">
-        {stack.map((group) => (
+        {data.stack.map((group) => (
           <li>
             <span class="node" aria-hidden="true"></span>
             <h4>{group.title}</h4>
@@ -55,7 +48,7 @@ const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
       style="--i:2"
       aria-labelledby="projects"
     >
-      <h2 id="projects">Projects</h2>
+      <h2 id="projects">{data.projectsHeading}</h2>
       {projects.length > 0 ? (
         <ul class="list">
           {projects.map((project) => (
@@ -65,13 +58,13 @@ const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
               </div>
               <div class="body">
                 <h3>{project.title}</h3>
-                <project class="desc">{project.description}</project>
+                <p class="desc">{project.description}</p>
                 {project.tags && project.tags.length > 0 && (
                   <ul class="chips">{project.tags.map((tag) => <li>{tag}</li>)}</ul>
                 )}
                 {project.video && (
                   <a class="btn watch" href={project.video} target="_blank" rel="noopener noreferrer">
-                    <Icons name="play" />Watch it<Icons name="arrow" />
+                    <Icons name="play" />{data.watch}<Icons name="arrow" />
                   </a>
                 )}
               </div>
@@ -97,8 +90,8 @@ const faces = ['front', 'back', 'right', 'left', 'top', 'bottom'];
               <div class="shadow"></div>
             </div>
             <div class="copy">
-              <p class="soon-label">Coming soon...</p>
-              <p class="muted">Example</p>
+              <p class="soon-label">{data.soon.label}</p>
+              <p class="muted">{data.soon.text}</p>
             </div>
           </div>
         </div>
