@@ -17,22 +17,24 @@ export const site = {
 // Home
 export const home = {
   title: '{nickname} | Welcome',
-  description: 'TODO: desc',
+  description: 'Personal website of {nickname}\'s featuring information about him and his work',
   kicker: 'Backend Developer',
   lead:
-    'TODO: lead',
+    'I work as a freelance developer building reliable backend systems and software. ' + 
+    'Most of my work is done in Java and I am learning Kotlin. A preference for simplicity, clean and high-quality code.',
   buttons: { github: 'GitHub', email: 'Gmail', discord: 'Discord' },
 };
 
 // Portfolio
 export const portfolio = {
   title: '{nickname} | Portfolio',
-  description: 'TODO: desc',
+  description: 'Personal portfolio showcasing {nickname}\'s projects, skills and experience.',
   heading: 'Portfolio',
   about: {
-    heading: 'TODO: head',
+    heading: 'Minecraft Developer',
     text:
-      'TODO: desc',
+      'I have around 6 years of experience developing Minecraft software ' + 
+      'with a focus on plugins, performace and packet-level systems.',
   },
   stackHeading: 'Tech stack',
   stack: [
@@ -45,7 +47,7 @@ export const portfolio = {
   projectsHeading: 'Projects',
   watch: 'Watch it',
   soon: { 
-    label: 'Coming soon...', text: ':)' 
+    label: '^_^', text: 'Coming soon...' 
   },
 };
 
