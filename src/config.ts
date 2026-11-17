@@ -2,7 +2,7 @@ export const profile = {
   name: 'Volodymyr',
   nickname: 'Xkyrell',
   github: 'https://github.xkyrell.me',
-  email: 'xkyrell@gmail.com',
+  email: 'contact@xkyrell.me',
   discord: 'https://discord.xkyrell.me',
 };
 
