@@ -53,12 +53,33 @@ export const portfolio = {
 };
 
 // FAQ definition
+
 export const faq = {
   title: '{nickname} | FAQ',
   description: 'Frequently asked questions from employers and clients.',
   heading: 'FAQ',
-  items: [],
+  items: [
+    qa('How long have you known Minecraft?',
+       "I've known Minecraft for over 10 years and have around 6 years of development experience."
+      ),
+    qa('Have you worked with live Minecraft servers?',
+       "Yes, I've worked with different game modes on servers with 50 to 800+ concurrent players."
+      ),
+    qa('What is your time zone?',
+       'GMT+3. I can adjust my working hours if needed.'
+      ),
+    qa('Which Minecraft versions do you support?',
+       'I support versions 1.8-26.1 with a preference for the latest versions.'
+      ),
+    qa('Can you work with an existing codebase?',
+       'Yes, as long as the code is not so bad that it hurts to look at.'
+      ),
+    qa('How can I discuss a project with you?',
+       'Visit the home page to find my contact links.'
+      ),
+  ],
 };
+
 
 // Privacy
 export const privacy = {
