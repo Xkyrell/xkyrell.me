@@ -21,7 +21,8 @@ export const home = {
   kicker: 'Backend Developer',
   lead:
     'I work as a freelance developer building reliable backend systems and software. ' + 
-    'Most of my work is done in Java and I am learning Kotlin. A preference for simplicity, clean and high-quality code.',
+    'Most of my work is done in Java and I am learning Kotlin. ' + 
+    'A preference for simplicity, clean and high-quality code.',
   buttons: { github: 'GitHub', email: 'Gmail', discord: 'Discord' },
 };
 
@@ -99,6 +100,13 @@ export const privacy = {
     },
   ],
   back: '← Back to the main page',
+};
+
+// 404
+export const notFound = {
+  title: '{nickname} | 404',
+  description: 'This page could not be found.',
+  heading: '404'
 };
 
 import { profile } from './config';
