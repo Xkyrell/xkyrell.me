@@ -1,9 +1,9 @@
 export const profile = {
   name: 'Volodymyr',
   nickname: 'Xkyrell',
-  github: 'https://github.com/xkyrell',
+  github: 'https://github.xkyrell.me',
   email: 'xkyrell@gmail.com',
-  discordId: '371321961881796612',
+  discord: 'https://discord.xkyrell.me',
 };
 
 export const url = (path = '/') => {
